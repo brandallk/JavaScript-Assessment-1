@@ -64,4 +64,43 @@ var crayola1990 = [
  * remember strings are immutable but the value of a variable can be adjusted as often as needed.
  * take advantage of the methods available on stings http://www.w3schools.com/js/js_string_methods.asp
  * there are multiple ways to do something like this but you might consider using split and join
- */ 
+ */
+
+function formatColorNames(arr) {
+	var formatted = [];
+	for (var i = 0; i < arr.length; i++) {
+		var name = arr[i];
+		var formattedName = name.replace(/(\s)*([A-Z])/g, (match, capture1, capture2) => {
+			return capture1 ? "-" + capture2.toLowerCase() : capture2.toLowerCase();
+		});
+		formatted.push(formattedName);
+	}
+	return formatted;
+}
+// console.log(formatColorNames(crayola1990));  // -> ['scarlet','sunset-orange','vivid-tangerine', ... ]
+
+function altFormatColorNames(arr) {
+	return arr.map( name => {
+		return name.replace(/(\s)*([A-Z])/g, (match, capture1, capture2) => {
+			return capture1 ? "-" + capture2.toLowerCase() : capture2.toLowerCase();
+		});
+	});
+}
+// console.log(altFormatColorNames(crayola1990));  // -> ['scarlet','sunset-orange','vivid-tangerine', ... ]
+
+function alt2FormatColorNames(arr) {
+	var formatted = [];
+	for (var i = 0; i < arr.length; i++) {
+		var name = arr[i], formattedName = "";
+
+		for (var j = 0; j < name.length; j++) {
+			var char = name[j];
+			var altChar = char === " " ? "-" : char.toLowerCase();
+			formattedName += altChar;
+		}
+
+		formatted.push(formattedName);
+	}
+	return formatted;
+}
+console.log(alt2FormatColorNames(crayola1990));  // -> ['scarlet','sunset-orange','vivid-tangerine', ... ]
